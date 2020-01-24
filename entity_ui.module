@@ -200,7 +200,26 @@ function entity_ui_controller($type = NULL) {
   return $static[$type];
 }
 
+/**
+ * Checks if user has access to the admin UI for an entity type
+ * @param $entity_type
+ *    The type of the entity
+ */
+function entity_ui_access($op, $entity_type) {
+  $rights = &backdrop_static(__FUNCTION__, array());
+  if (isset($rights[$entity_type])) {
+    return $rights[$entity_type];
+  }
 
+  $info = entity_get_info($entity_type);
+  $access_callback = isset($info['access callback']) ? $info['access callback'] : 'user_access';
+  $access_arguments = isset($info['access arguments']) ? $info['access arguments'] : array();
+  if (empty($access_arguments)) {
+    return FALSE;
+  }
+  $rights[$entity_type] = call_user_func_array($access_callback, $access_arguments);
+  return $rights[$entity_type];
+}
 
 /**
  * Page callback to show links to add an entity of a specific bundle.
