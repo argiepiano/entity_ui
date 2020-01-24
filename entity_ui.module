@@ -200,9 +200,6 @@ function entity_ui_controller($type = NULL) {
   return $static[$type];
 }
 
-function entity_ui_access($entity_type, $type) {
-  return TRUE;
-}
 
 
 /**

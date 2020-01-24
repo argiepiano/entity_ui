@@ -44,7 +44,7 @@ class EntityDefaultUIController {
       'page callback' => 'backdrop_get_form',
       'page arguments' => array($this->entityType . '_overview_form', $this->entityType),
       'description' => 'Manage ' . $plural_label . '.',
-      'access callback' => 'entity_ui_access',
+      'access callback' => 'entity_access',
       'access arguments' => array('view', $this->entityType),
     );
     $items[$this->path . '/list'] = array(
@@ -57,7 +57,7 @@ class EntityDefaultUIController {
       'title arguments' => array('add', $this->entityType),
       'page callback' => 'entity_ui_get_form',
       'page arguments' => array($this->entityType, NULL, 'add'),
-      'access callback' => 'entity_ui_access',
+      'access callback' => 'entity_access',
       'access arguments' => array('create', $this->entityType),
       'type' => MENU_LOCAL_ACTION,
     );
@@ -68,7 +68,7 @@ class EntityDefaultUIController {
       'page callback' => 'entity_ui_get_form',
       'page arguments' => array($this->entityType, $this->id_count + 1),
       'load arguments' => array($this->entityType),
-      'access callback' => 'entity_ui_access',
+      'access callback' => 'entity_access',
       'access arguments' => array('update', $this->entityType, $this->id_count + 1),
     );
     $items[$this->path . '/manage/' . $wildcard . '/edit'] = array(
@@ -83,7 +83,7 @@ class EntityDefaultUIController {
       'page callback' => 'entity_ui_get_form',
       'page arguments' => array($this->entityType, $this->id_count + 1, 'clone'),
       'load arguments' => array($this->entityType),
-      'access callback' => 'entity_ui_access',
+      'access callback' => 'entity_access',
       'access arguments' => array('create', $this->entityType),
     );
     // Menu item for operations like revert and delete.
@@ -91,7 +91,7 @@ class EntityDefaultUIController {
       'page callback' => 'backdrop_get_form',
       'page arguments' => array($this->entityType . '_operation_form', $this->entityType, $this->id_count + 1, $this->id_count + 2),
       'load arguments' => array($this->entityType),
-      'access callback' => 'entity_ui_access',
+      'access callback' => 'entity_access',
       'access arguments' => array('delete', $this->entityType, $this->id_count + 1),
     );
 
